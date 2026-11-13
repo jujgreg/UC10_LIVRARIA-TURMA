@@ -22,6 +22,10 @@ public class Livro {
         private String autor;
 
         @ManyToOne
+        @JoinColumn(name = "id_categoria", nullable = false)
+        private Categoria categoria;
+
+        @ManyToOne
         @JoinColumn(name = "id_editora", nullable = false)
         private Editora editora;
 
@@ -73,6 +77,14 @@ public class Livro {
 
         public void setEditora(Editora editora) {
                 this.editora = editora;
+        }
+
+        public Categoria getCategoria() {
+                return categoria;
+        }
+
+        public void setCategoria(Categoria categoria) {
+                this.categoria = categoria;
         }
 
         public double getPreco() {

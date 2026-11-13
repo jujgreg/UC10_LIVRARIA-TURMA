@@ -3,6 +3,7 @@ package br.senac.sp.livraria.controller;
 import br.senac.sp.livraria.model.Livro;
 import br.senac.sp.livraria.service.LivroService;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,6 +80,16 @@ public class LivroController {
 
         return ResponseEntity.status(404).build();
 
+    }
+
+    @GetMapping(value = {"", "/"}, params = "anoEdicao")
+    public ResponseEntity<List<Livro>> findByAnoEdicaoLessThan(@PathParam("anoEdicao") int anoEdicao){
+        return ResponseEntity.status(200).body(livroService.findByAnoEdicaoLessThan(anoEdicao));
+    }
+
+    @GetMapping(value = {"", "/"}, params = "autor")
+    public ResponseEntity<List<Livro>> findByAutorStartingWith(@PathParam("autor") String autor){
+        return ResponseEntity.status(200).body(livroService.findByAutorStartingWith(autor));
     }
 
 }

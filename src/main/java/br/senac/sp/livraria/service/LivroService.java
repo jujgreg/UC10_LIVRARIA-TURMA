@@ -56,5 +56,12 @@ public class LivroService {
         return null;
 
     }
+    public List<Livro> findByAnoEdicaoLessThan(int anoEdicao){
+        return livroRepository.findByAnoEdicaoLessThan(anoEdicao);
+    }
+
+    public List<Livro> findByAutorStartingWith(String autor){
+        return livroRepository.findByAutorStartingWith(autor);
+    }
 
 }
