@@ -54,6 +54,20 @@ public class LivroController {
         }
     }
 
+    @GetMapping(value = {"", "/"}, params = "anoEdicao")
+    public ResponseEntity<List<Livro>> findByAnoEdicaoLessThan(
+            @RequestParam("anoEdicao") int anoEdicao
+    ){
+        return ResponseEntity.status(200).body(livroService.findByAnoEdicaoLessThan(anoEdicao));
+    }
+
+    @GetMapping(value = {"", "/"}, params = "autor")
+    public ResponseEntity<List<Livro>> findByAutorStartingWith(
+            @RequestParam("autor") String autor
+    ){
+        return ResponseEntity.status(200).body(livroService.findByAutorStartingWith(autor));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> excluir(@PathVariable("id") int id){
         if (livroService.excluir(id)){
@@ -67,6 +81,14 @@ public class LivroController {
 
         return ResponseEntity.status(404).body(erro);
 
+    }
+
+    @GetMapping(value = {"", "/"}, params = {"valorInicial", "valorFinal"})
+    public ResponseEntity<List<Livro>> listarPrecoPor(
+            @RequestParam("valorInicial") double valorInicial,
+            @RequestParam("valorFinal")  double valorFinal
+    ){
+        return ResponseEntity.status(200).body(livroService.listarPrecoEntre(valorInicial, valorFinal));
     }
 
     @PutMapping
